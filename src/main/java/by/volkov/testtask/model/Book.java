@@ -1,11 +1,12 @@
 package by.volkov.testtask.model;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 public class Book extends AbstractBaseEntity {
     private String title;
 
-    private int year;
+    private LocalDate publicationYear;
 
     private String publishingHouse;
 
@@ -14,10 +15,10 @@ public class Book extends AbstractBaseEntity {
     public Book() {
     }
 
-    public Book(Integer id, String title, int year, String publishingHouse, Set<Author> authors) {
+    public Book(Integer id, String title, LocalDate publicationYear, String publishingHouse, Set<Author> authors) {
         super(id);
         this.title = title;
-        this.year = year;
+        this.publicationYear = publicationYear;
         this.publishingHouse = publishingHouse;
         this.authors = authors;
     }
@@ -30,12 +31,12 @@ public class Book extends AbstractBaseEntity {
         this.title = title;
     }
 
-    public int getYear() {
-        return year;
+    public LocalDate getPublicationYear() {
+        return publicationYear;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setPublicationYear(LocalDate publicationYear) {
+        this.publicationYear = publicationYear;
     }
 
     public String getPublishingHouse() {
