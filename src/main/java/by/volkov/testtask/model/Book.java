@@ -1,23 +1,25 @@
 package by.volkov.testtask.model;
 
+import java.util.Set;
+
 public class Book extends AbstractBaseEntity {
     private String title;
 
     private int year;
 
-    private Author author;
-
     private String publishingHouse;
+
+    private Set<Author> authors;
 
     public Book() {
     }
 
-    public Book(Integer id, String title, int year, Author author, String publishingHouse) {
+    public Book(Integer id, String title, int year, String publishingHouse, Set<Author> authors) {
         super(id);
         this.title = title;
         this.year = year;
-        this.author = author;
         this.publishingHouse = publishingHouse;
+        this.authors = authors;
     }
 
     public String getTitle() {
@@ -36,19 +38,19 @@ public class Book extends AbstractBaseEntity {
         this.year = year;
     }
 
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
     public String getPublishingHouse() {
         return publishingHouse;
     }
 
     public void setPublishingHouse(String publishingHouse) {
         this.publishingHouse = publishingHouse;
+    }
+
+    public Set<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Set<Author> authors) {
+        this.authors = authors;
     }
 }
