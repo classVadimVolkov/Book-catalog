@@ -1,6 +1,11 @@
 package by.volkov.testtask.model;
 
+import javax.persistence.*;
+
+@MappedSuperclass
+@Access(AccessType.FIELD)
 public abstract class AbstractBaseEntity {
+    @Id
     protected Integer id;
 
     public AbstractBaseEntity() {

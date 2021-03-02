@@ -1,17 +1,34 @@
 package by.volkov.testtask.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.util.Set;
 
+@Entity
+@Table(name = "author")
 public class Author extends AbstractBaseEntity {
+    @NotNull(message = "Name is empty")
+    @NotBlank(message = "Name is empty")
     private String name;
 
+    @NotNull(message = "Surname is empty")
+    @NotBlank(message = "Surname is empty")
     private String surname;
 
+    @NotNull(message = "Date is empty")
+    @Past(message = "Date should be in the past")
     private LocalDate birthday;
 
+    @NotNull(message = "Sex is empty")
+    @Enumerated(EnumType.STRING)
     private SexType sex;
 
+    @ManyToMany
+    @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "author_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
     private Set<Book> books;
 
     public Author() {
@@ -76,7 +93,7 @@ public class Author extends AbstractBaseEntity {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Author{" +
                 "id=" + id +
                 ", name=" + name +
                 ", surname=" + surname +

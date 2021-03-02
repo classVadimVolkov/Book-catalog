@@ -1,8 +1,11 @@
 package by.volkov.testtask.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
+@Entity
+@Table(name = "book")
 public class Book extends AbstractBaseEntity {
     private String title;
 
@@ -10,6 +13,7 @@ public class Book extends AbstractBaseEntity {
 
     private String publishingHouse;
 
+    @ManyToMany(mappedBy = "books")
     private Set<Author> authors;
 
     public Book() {
@@ -53,5 +57,16 @@ public class Book extends AbstractBaseEntity {
 
     public void setAuthors(Set<Author> authors) {
         this.authors = authors;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title=" + title +
+                ", publicationYear=" + publicationYear +
+                ", publishingHouse=" + publishingHouse +
+                ", authors=" + authors +
+                '}';
     }
 }
