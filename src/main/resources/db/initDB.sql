@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS book;
 DROP TABLE IF EXISTS author_book;
+DROP TABLE IF EXISTS book;
 DROP TABLE IF EXISTS author;
 DROP TYPE IF EXISTS sex_type;
 DROP SEQUENCE IF EXISTS author_seq;
@@ -29,8 +29,9 @@ CREATE TABLE book
 
 CREATE TABLE author_book
 (
-    author_id INTEGER PRIMARY KEY NOT NULL,
-    book_id   INTEGER PRIMARY KEY,
+    author_id INTEGER NOT NULL,
+    book_id INTEGER,
+    UNIQUE (author_id, book_id),
     FOREIGN KEY (author_id) REFERENCES author (id) ON DELETE CASCADE,
     FOREIGN KEY (book_id) REFERENCES book (id)
 );
