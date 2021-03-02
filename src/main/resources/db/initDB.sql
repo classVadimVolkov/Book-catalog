@@ -12,7 +12,7 @@ CREATE TYPE sex_type AS ENUM ('MALE', 'FEMALE', 'UNDEFINED');
 
 CREATE TABLE author
 (
-    id       INTEGER PRIMARY KEY DEFAULT nextval(author_seq),
+    id       INTEGER PRIMARY KEY DEFAULT nextval('author_seq'),
     name     VARCHAR                                 NOT NULL,
     surname  VARCHAR                                 NOT NULL,
     birthday DATE                                    NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE author
 
 CREATE TABLE book
 (
-    id               INTEGER PRIMARY KEY DEFAULT nextval(book_seq),
+    id               INTEGER PRIMARY KEY DEFAULT nextval('book_seq'),
     title            VARCHAR NOT NULL,
     publication_year DATE    NOT NULL,
     publishing_house VARCHAR NOT NULL
@@ -29,8 +29,8 @@ CREATE TABLE book
 
 CREATE TABLE author_book
 (
-    author_id INTEGER NOT NULL,
-    book_id   INTEGER,
+    author_id INTEGER PRIMARY KEY NOT NULL,
+    book_id   INTEGER PRIMARY KEY,
     FOREIGN KEY (author_id) REFERENCES author (id) ON DELETE CASCADE,
     FOREIGN KEY (book_id) REFERENCES book (id)
 );
