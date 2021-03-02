@@ -789,7 +789,7 @@ false Zulu
     <database id="2" parent="1" name="bookcatalog">
       <ObjectId>16850</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>1940</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2220</IntrospectionStateNumber>
       <Current>1</Current>
     </database>
     <database id="3" parent="1" name="postgres">
@@ -873,7 +873,7 @@ UC/10
 </Acl>
       <StateNumber>287</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>1941</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2221</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="20" parent="2" name="plpgsql">
@@ -974,21 +974,21 @@ UC/10
       <Type>index</Type>
     </access-method>
     <sequence id="32" parent="19" name="author_seq">
-      <ObjectId>17107</ObjectId>
+      <ObjectId>17318</ObjectId>
       <Owner>user</Owner>
-      <StateNumber>1935</StateNumber>
+      <StateNumber>2215</StateNumber>
       <DataType>bigint|0s</DataType>
     </sequence>
     <sequence id="33" parent="19" name="book_seq">
-      <ObjectId>17109</ObjectId>
+      <ObjectId>17320</ObjectId>
       <Owner>user</Owner>
-      <StateNumber>1936</StateNumber>
+      <StateNumber>2216</StateNumber>
       <DataType>bigint|0s</DataType>
     </sequence>
     <object-type id="34" parent="19" name="sex_type">
-      <ObjectId>17112</ObjectId>
+      <ObjectId>17323</ObjectId>
       <Owner>user</Owner>
-      <StateNumber>1857</StateNumber>
+      <StateNumber>2188</StateNumber>
       <SubKind>enum</SubKind>
       <Labels>MALE
 FEMALE
@@ -996,25 +996,25 @@ UNDEFINED</Labels>
       <SubCategory>enum</SubCategory>
     </object-type>
     <table id="35" parent="19" name="author">
-      <ObjectId>17119</ObjectId>
+      <ObjectId>17330</ObjectId>
       <Owner>user</Owner>
-      <StateNumber>1860</StateNumber>
+      <StateNumber>2192</StateNumber>
     </table>
     <table id="36" parent="19" name="author_book">
-      <ObjectId>17138</ObjectId>
+      <ObjectId>17349</ObjectId>
       <Owner>user</Owner>
-      <StateNumber>1860</StateNumber>
+      <StateNumber>2192</StateNumber>
     </table>
     <table id="37" parent="19" name="book">
-      <ObjectId>17129</ObjectId>
+      <ObjectId>17340</ObjectId>
       <Owner>user</Owner>
-      <StateNumber>1860</StateNumber>
+      <StateNumber>2192</StateNumber>
     </table>
     <column id="38" parent="35" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1858</StateNumber>
+      <StateNumber>2190</StateNumber>
       <DefaultExpression>nextval(&apos;author_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
@@ -1022,34 +1022,34 @@ UNDEFINED</Labels>
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1858</StateNumber>
+      <StateNumber>2190</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="40" parent="35" name="surname">
       <Position>3</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1858</StateNumber>
+      <StateNumber>2190</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="41" parent="35" name="birthday">
       <Position>4</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1858</StateNumber>
+      <StateNumber>2190</StateNumber>
       <TypeId>1082</TypeId>
     </column>
     <column id="42" parent="35" name="sex">
       <Position>5</Position>
       <DataType>sex_type|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1858</StateNumber>
+      <StateNumber>2190</StateNumber>
       <DefaultExpression>&apos;UNDEFINED&apos;::sex_type</DefaultExpression>
-      <TypeId>17112</TypeId>
+      <TypeId>17323</TypeId>
     </column>
     <index id="43" parent="35" name="author_pkey">
-      <ObjectId>17127</ObjectId>
-      <StateNumber>1858</StateNumber>
+      <ObjectId>17338</ObjectId>
+      <StateNumber>2190</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1058,8 +1058,8 @@ UNDEFINED</Labels>
       <ClassIds>1978</ClassIds>
     </index>
     <key id="44" parent="35" name="author_pkey">
-      <ObjectId>17128</ObjectId>
-      <StateNumber>1858</StateNumber>
+      <ObjectId>17339</ObjectId>
+      <StateNumber>2190</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>author_pkey</UnderlyingIndexName>
@@ -1068,18 +1068,18 @@ UNDEFINED</Labels>
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1860</StateNumber>
+      <StateNumber>2192</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="46" parent="36" name="book_id">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>1860</StateNumber>
+      <StateNumber>2192</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <index id="47" parent="36" name="author_book_author_id_book_id_key">
-      <ObjectId>17141</ObjectId>
-      <StateNumber>1860</StateNumber>
+      <ObjectId>17352</ObjectId>
+      <StateNumber>2192</StateNumber>
       <ColNames>author_id
 book_id</ColNames>
       <Unique>1</Unique>
@@ -1088,17 +1088,17 @@ book_id</ColNames>
       <ClassIds>1978,1978</ClassIds>
     </index>
     <key id="48" parent="36" name="author_book_author_id_book_id_key">
-      <ObjectId>17142</ObjectId>
-      <StateNumber>1860</StateNumber>
+      <ObjectId>17353</ObjectId>
+      <StateNumber>2192</StateNumber>
       <ColNames>author_id
 book_id</ColNames>
       <UnderlyingIndexName>author_book_author_id_book_id_key</UnderlyingIndexName>
     </key>
     <foreign-key id="49" parent="36" name="author_book_author_id_fkey">
-      <ObjectId>17143</ObjectId>
-      <StateNumber>1860</StateNumber>
+      <ObjectId>17354</ObjectId>
+      <StateNumber>2192</StateNumber>
       <ColNames>author_id</ColNames>
-      <RefTableId>17119</RefTableId>
+      <RefTableId>17330</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>author</RefTableName>
       <RefKeyName>author_pkey</RefKeyName>
@@ -1106,10 +1106,10 @@ book_id</ColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
     <foreign-key id="50" parent="36" name="author_book_book_id_fkey">
-      <ObjectId>17148</ObjectId>
-      <StateNumber>1860</StateNumber>
+      <ObjectId>17359</ObjectId>
+      <StateNumber>2192</StateNumber>
       <ColNames>book_id</ColNames>
-      <RefTableId>17129</RefTableId>
+      <RefTableId>17340</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>book</RefTableName>
       <RefKeyName>book_pkey</RefKeyName>
@@ -1119,7 +1119,7 @@ book_id</ColNames>
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1859</StateNumber>
+      <StateNumber>2191</StateNumber>
       <DefaultExpression>nextval(&apos;book_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
@@ -1127,26 +1127,26 @@ book_id</ColNames>
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1859</StateNumber>
+      <StateNumber>2191</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="53" parent="37" name="publication_year">
       <Position>3</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1859</StateNumber>
+      <StateNumber>2191</StateNumber>
       <TypeId>1082</TypeId>
     </column>
     <column id="54" parent="37" name="publishing_house">
       <Position>4</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1859</StateNumber>
+      <StateNumber>2191</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <index id="55" parent="37" name="book_pkey">
-      <ObjectId>17136</ObjectId>
-      <StateNumber>1859</StateNumber>
+      <ObjectId>17347</ObjectId>
+      <StateNumber>2191</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1155,8 +1155,8 @@ book_id</ColNames>
       <ClassIds>1978</ClassIds>
     </index>
     <key id="56" parent="37" name="book_pkey">
-      <ObjectId>17137</ObjectId>
-      <StateNumber>1859</StateNumber>
+      <ObjectId>17348</ObjectId>
+      <StateNumber>2191</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>book_pkey</UnderlyingIndexName>

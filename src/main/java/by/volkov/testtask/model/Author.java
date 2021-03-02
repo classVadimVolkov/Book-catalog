@@ -26,6 +26,14 @@ public class Author extends AbstractBaseEntity {
         this.books = books;
     }
 
+    public Author(Integer id, String name, String surname, LocalDate birthday, SexType sex) {
+        super(id);
+        this.name = name;
+        this.surname = surname;
+        this.birthday = birthday;
+        this.sex = sex;
+    }
+
     public String getName() {
         return name;
     }
@@ -64,5 +72,17 @@ public class Author extends AbstractBaseEntity {
 
     public void setBooks(Set<Book> books) {
         this.books = books;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name=" + name +
+                ", surname=" + surname +
+                ", birthday=" + birthday +
+                ", sex=" + sex +
+                ", books=" + books +
+                '}';
     }
 }
