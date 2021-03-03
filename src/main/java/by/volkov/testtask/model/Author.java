@@ -7,9 +7,17 @@ import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.util.Set;
 
+@NamedQueries({
+        @NamedQuery(name = Author.DELETE, query = "DELETE FROM Author a WHERE a.id=:id"),
+        @NamedQuery(name = Author.GET_ALL_AUTHORS, query = "SELECT a FROM Author a")
+})
 @Entity
 @Table(name = "author")
 public class Author extends AbstractBaseEntity {
+
+    public static final String DELETE = "Author.delete";
+    public static final String GET_ALL_AUTHORS = "Author.getAll";
+
     @NotNull(message = "Name is empty")
     @NotBlank(message = "Name is empty")
     private String name;
