@@ -1,5 +1,3 @@
-package by.volkov.testtask;
-
 import by.volkov.testtask.model.Author;
 import by.volkov.testtask.model.SexType;
 import by.volkov.testtask.repository.AuthorRepository;

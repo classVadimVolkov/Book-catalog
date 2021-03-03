@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Access(AccessType.FIELD)
 public abstract class AbstractBaseEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     protected Integer id;
 
     public AbstractBaseEntity() {

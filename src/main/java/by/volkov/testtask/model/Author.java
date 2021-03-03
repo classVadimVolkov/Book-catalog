@@ -34,7 +34,7 @@ public class Author extends AbstractBaseEntity {
     @Enumerated(EnumType.STRING)
     private SexType sex;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "author_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id"))
     private Set<Book> books;

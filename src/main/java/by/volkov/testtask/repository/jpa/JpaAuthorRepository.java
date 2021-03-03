@@ -20,7 +20,7 @@ public class JpaAuthorRepository implements AuthorRepository {
             em.persist(author);
             return author;
         } else {
-            return em.merge(author);
+            return get(author.getId()) == null ? null : em.merge(author);
         }
     }
 
