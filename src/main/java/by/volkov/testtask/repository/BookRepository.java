@@ -1,29 +1,34 @@
 package by.volkov.testtask.repository;
 
-import by.volkov.testtask.model.Author;
 import by.volkov.testtask.model.Book;
 import by.volkov.testtask.model.SexType;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface BookRepository {
-    Book save(Book book, int authorId);
+    Book save(Book book, int... authorId);
 
-    boolean delete(int id, int authorId);
+    boolean delete(int id);
 
-    Book get(int id, int authorId);
+    Book get(int id);
 
     List<Book> getAll();
 
     List<Book> getAllByTitle(String title);
 
-    List<Book> getAllByYear(int year);
+    List<Book> getAllByPublicationYear(LocalDate publicationYear);
 
     List<Book> getAllByPublishingHouse(String publishingHouse);
 
-    List<Author> getAllByAuthorNameOrSurname(String name, String surname, int authorId);
+    List<Book> getAllByAuthorNameOrSurname(String name, String surname);
 
-    List<Author> getAllByAuthorSex(SexType sex, int authorId);
+    List<Book> getAllByAuthorFirstLetters(String name, String surname);
 
-    List<Author> getAllByAuthorBirthday(String birthday, int authorId);
+    List<Book> getAllByAuthorSex(SexType sex);
+
+    List<Book> getAllByAuthorBirthday(LocalDate birthday);
+
+    List<Book> getAllFiltered(String title, LocalDate publicationYear, String publishingHouse,
+                              String name, String surname, SexType sex, LocalDate birthday);
 }

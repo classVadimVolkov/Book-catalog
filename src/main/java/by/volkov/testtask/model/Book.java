@@ -7,9 +7,34 @@ import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.util.Set;
 
+@NamedQueries({
+        @NamedQuery(name = Book.DELETE, query = "DELETE FROM Book b WHERE b.id=:id"),
+        @NamedQuery(name = Book.GET_ALL, query = "SELECT b FROM Book b"),
+        @NamedQuery(name = Book.GET_ALL_BY_TITLE, query = "SELECT b FROM Book b WHERE b.title=:title"),
+        @NamedQuery(name = Book.GET_ALL_BY_PUBLICATION_YEAR, query = "SELECT b FROM Book b " +
+                "WHERE b.publicationYear=:publicationYear"),
+        @NamedQuery(name = Book.GET_ALL_BY_PUBLISHING_HOUSE, query = "SELECT b FROM Book b " +
+                "WHERE b.publishingHouse=:publishingHouse"),
+        @NamedQuery(name = Book.GET_ALL_BY_AUTHOR_NAME_OR_SURNAME, query = "SELECT b FROM Book b " +
+                "JOIN b.authors a WHERE a.name=:name OR a.surname=:surname"),
+        @NamedQuery(name = Book.GET_ALL_BY_AUTHOR_SEX, query = "SELECT b FROM Book b " +
+                "JOIN b.authors a WHERE a.sex=:sex"),
+        @NamedQuery(name = Book.GET_ALL_BY_AUTHOR_BIRTHDAY, query = "SELECT b FROM Book b " +
+                "JOIN b.authors a WHERE a.birthday=:birthday")
+})
 @Entity
 @Table(name = "book")
 public class Book extends AbstractBaseEntity {
+
+    public static final String DELETE = "Book.delete";
+    public static final String GET_ALL = "Book.getAll";
+    public static final String GET_ALL_BY_PUBLICATION_YEAR = "Book.getAllByPublicationYear";
+    public static final String GET_ALL_BY_TITLE = "Book.getAllByTitle";
+    public static final String GET_ALL_BY_PUBLISHING_HOUSE = "Book.getAllByPublishingHouse";
+    public static final String GET_ALL_BY_AUTHOR_NAME_OR_SURNAME = "Book.getAllByAuthorNameOrSurname";
+    public static final String GET_ALL_BY_AUTHOR_SEX = "Book.getAllByAuthorSex";
+    public static final String GET_ALL_BY_AUTHOR_BIRTHDAY = "Book.getAllByAuthorBirthday";
+
     @NotNull(message = "Title is empty")
     @NotBlank(message = "Title is empty")
     private String title;
