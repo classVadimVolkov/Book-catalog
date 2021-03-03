@@ -2,6 +2,7 @@ package by.volkov.testtask;
 
 import by.volkov.testtask.model.Author;
 import by.volkov.testtask.model.SexType;
+import by.volkov.testtask.repository.AuthorRepository;
 import by.volkov.testtask.repository.jdbc.JdbcAuthorRepository;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -13,7 +14,7 @@ public class SpringMain {
     public static void main(String[] args) {
         try (ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext(
                 "spring/spring-app.xml", "spring/spring-db.xml")) {
-            JdbcAuthorRepository authorRepository = appCtx.getBean(JdbcAuthorRepository.class);
+            AuthorRepository authorRepository = appCtx.getBean(JdbcAuthorRepository.class);
             authorRepository.getAll().forEach(System.out::println);
 
             System.out.println("----GET----");
