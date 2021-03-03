@@ -1,16 +1,25 @@
 package by.volkov.testtask.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
 @Table(name = "book")
 public class Book extends AbstractBaseEntity {
+    @NotNull(message = "Title is empty")
+    @NotBlank(message = "Title is empty")
     private String title;
 
+    @NotNull(message = "Date is empty")
+    @Past(message = "Date should be in the past")
     private LocalDate publicationYear;
 
+    @NotNull(message = "Name of publishing house is empty")
+    @NotBlank(message = "Name of publishing house is empty")
     private String publishingHouse;
 
     @ManyToMany(mappedBy = "books")
