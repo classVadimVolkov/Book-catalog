@@ -21,9 +21,7 @@ public interface BookRepository {
 
     List<Book> getAllByPublishingHouse(String publishingHouse);
 
-    List<Book> getAllByAuthorNameOrSurname(String name, String surname);
-
-    List<Book> getAllByAuthorFirstLetters(String name, String surname);
+    List<Book> getAllByAuthorFirstLettersNameOrSurname(String name, String surname);
 
     List<Book> getAllByAuthorSex(SexType sex);
 
