@@ -6,7 +6,9 @@ Book catalog app
 1. Database configuration
 
 Create database bookcatalog
+
 username: user
+
 password: password
 
 ------------------------
