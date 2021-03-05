@@ -2,12 +2,14 @@
 
 Book catalog app
 
-1. Database configuration
 -----------------------------
+1. Database configuration
+
 Create database bookcatalog
 username: user
 password: password
 
-2. Clone
 ------------------------
+2. Clone
+
 git clone https://github.com/classVadimVolkov/Book-catalog.git
