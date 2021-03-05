@@ -79,9 +79,12 @@ public class BookService {
         return repository.getAllByAuthorBirthday(birthday);
     }
 
-    public List<Book> getAllFiltered(@Nullable String title, @Nullable LocalDate publicationYear,
-                                     @Nullable String publishingHouse, @Nullable String authorName,
-                                     @Nullable String authorSurname, @Nullable SexType authorSex,
+    public List<Book> getAllFiltered(@Nullable String title,
+                                     @Nullable LocalDate publicationYear,
+                                     @Nullable String publishingHouse,
+                                     @Nullable String authorName,
+                                     @Nullable String authorSurname,
+                                     @Nullable SexType authorSex,
                                      @Nullable LocalDate authorBirthday) {
 
         return repository.getAllFiltered(title, publicationYear, publishingHouse,

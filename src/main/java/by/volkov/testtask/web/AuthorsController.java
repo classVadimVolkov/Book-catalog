@@ -22,15 +22,15 @@ public class AuthorsController {
     }
 
     @GetMapping()
-    public String index(Model model) {
+    public String getAll(Model model) {
         model.addAttribute("authors", service.getAll());
         return "authors/index";
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
+    public String get(@PathVariable("id") int id, Model model) {
         model.addAttribute("author", service.get(id));
-        return "authors/show";
+        return "authors/get";
     }
 
     @GetMapping("/new")
@@ -56,7 +56,7 @@ public class AuthorsController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("person") @Valid Author author, BindingResult bindingResult) {
+    public String update(@ModelAttribute("author") @Valid Author author, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "authors/edit";
         }
