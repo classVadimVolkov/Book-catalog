@@ -74,26 +74,30 @@ public class BooksController {
     }
 
     @GetMapping()
-    public String getAllByTitle(@RequestParam("title") String title, Model model) {
+    public String getAllByTitle(@RequestParam(value = "title", required = false) String title, Model model) {
         model.addAttribute("booksByTitle", service.getAllByTitle(title));
         return "books/catalog";
     }
 
     @GetMapping()
-    public String getAllByPublicationYear(@RequestParam("publicationYear") LocalDate publicationYear, Model model) {
+    public String getAllByPublicationYear(@RequestParam(value = "publicationYear", required = false)
+                                                      LocalDate publicationYear, Model model) {
         model.addAttribute("booksByPublicationYear", service.getAllByPublicationYear(publicationYear));
         return "books/catalog";
     }
 
     @GetMapping()
-    public String getAllByPublishingHouse(@RequestParam("publishingHouse") String publishingHouse, Model model) {
+    public String getAllByPublishingHouse(@RequestParam(value = "publishingHouse", required = false)
+                                                      String publishingHouse, Model model) {
         model.addAttribute("booksByPublishingHouse", service.getAllByPublishingHouse(publishingHouse));
         return "books/catalog";
     }
 
     @GetMapping()
-    public String getAllByAuthorFirstLettersNameOrSurname(@RequestParam("authorName") String name,
-                                                          @RequestParam("authorSurname") String surname, Model model) {
+    public String getAllByAuthorFirstLettersNameOrSurname(@RequestParam(value = "authorName", required = false)
+                                                                      String name,
+                                                          @RequestParam(value = "authorSurname", required = false)
+                                                                  String surname, Model model) {
 
         model.addAttribute("booksByAuthorFirstLettersNameOrSurname",
                 service.getAllByAuthorFirstLettersNameOrSurname(name, surname));
@@ -101,25 +105,26 @@ public class BooksController {
     }
 
     @GetMapping()
-    public String getAllByAuthorSex(@RequestParam("authorSex") SexType sex, Model model) {
+    public String getAllByAuthorSex(@RequestParam(value = "authorSex", required = false) SexType sex, Model model) {
         model.addAttribute("booksByAuthorSex", service.getAllByAuthorSex(sex));
         return "books/catalog";
     }
 
     @GetMapping()
-    public String getAllByAuthorBirthday(@RequestParam("authorBirthday") LocalDate birthday, Model model) {
+    public String getAllByAuthorBirthday(@RequestParam(value = "authorBirthday", required = false)
+                                                     LocalDate birthday, Model model) {
         model.addAttribute("booksByAuthorBirthday", service.getAllByAuthorBirthday(birthday));
         return "books/catalog";
     }
 
     @GetMapping()
-    public String getAllFiltered(@RequestParam("title") String title,
-                                 @RequestParam("publicationYear") LocalDate publicationYear,
-                                 @RequestParam("publishingHouse") String publishingHouse,
-                                 @RequestParam("authorName") String authorName,
-                                 @RequestParam("authorSurname") String authorSurname,
-                                 @RequestParam("authorSex") SexType authorSex,
-                                 @RequestParam("authorBirthday") LocalDate authorBirthday,
+    public String getAllFiltered(@RequestParam(value = "title", required = false) String title,
+                                 @RequestParam(value = "publicationYear", required = false) LocalDate publicationYear,
+                                 @RequestParam(value = "publishingHouse", required = false) String publishingHouse,
+                                 @RequestParam(value = "authorName", required = false) String authorName,
+                                 @RequestParam(value = "authorSurname", required = false) String authorSurname,
+                                 @RequestParam(value = "authorSex", required = false) SexType authorSex,
+                                 @RequestParam(value = "authorBirthday", required = false) LocalDate authorBirthday,
                                  Model model) {
 
         model.addAttribute("booksByFilters", service.getAllFiltered(title, publicationYear, publishingHouse,
