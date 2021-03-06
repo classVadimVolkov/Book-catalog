@@ -24,7 +24,7 @@ public class AuthorsController {
     @GetMapping()
     public String getAll(Model model) {
         model.addAttribute("authors", service.getAll());
-        return "authors/index";
+        return "authors/authors";
     }
 
     @GetMapping("/{id}")
