@@ -46,7 +46,7 @@ public class BookService {
         Assert.notNull(book, "author must not be null");
         Assert.notEmpty(Arrays.stream(authorId).boxed().collect(Collectors.toList()),
                 "author id must not be empty");
-        if (repository.save(book) == null) {
+        if (repository.save(book, authorId) == null) {
             throw new NotFoundException("Not found entity");
         }
     }
