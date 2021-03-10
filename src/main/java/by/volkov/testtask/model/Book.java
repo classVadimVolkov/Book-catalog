@@ -32,14 +32,17 @@ public class Book extends AbstractBaseEntity {
     public static final String GET_ALL_BY_AUTHOR_SEX = "Book.getAllByAuthorSex";
     public static final String GET_ALL_BY_AUTHOR_BIRTHDAY = "Book.getAllByAuthorBirthday";
 
+    @Column(name = "title")
     @NotNull(message = "Title is empty")
     @NotBlank(message = "Title is empty")
     private String title;
 
+    @Column(name = "publication_year")
     @NotNull(message = "Date is empty")
     @Past(message = "Date should be in the past")
     private LocalDate publicationYear;
 
+    @Column(name = "publishing_house")
     @NotNull(message = "Name of publishing house is empty")
     @NotBlank(message = "Name of publishing house is empty")
     private String publishingHouse;

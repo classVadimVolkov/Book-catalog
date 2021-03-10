@@ -9,27 +9,31 @@ import java.util.Set;
 
 @NamedQueries({
         @NamedQuery(name = Author.DELETE, query = "DELETE FROM Author a WHERE a.id=:id"),
-        @NamedQuery(name = Author.GET_ALL_AUTHORS, query = "SELECT a FROM Author a")
+        @NamedQuery(name = Author.GET_ALL, query = "SELECT a FROM Author a")
 })
 @Entity
 @Table(name = "author")
 public class Author extends AbstractBaseEntity {
 
     public static final String DELETE = "Author.delete";
-    public static final String GET_ALL_AUTHORS = "Author.getAll";
+    public static final String GET_ALL = "Author.getAll";
 
+    @Column(name = "name")
     @NotNull(message = "Name is empty")
     @NotBlank(message = "Name is empty")
     private String name;
 
+    @Column(name = "surname")
     @NotNull(message = "Surname is empty")
     @NotBlank(message = "Surname is empty")
     private String surname;
 
+    @Column(name = "birthday")
     @NotNull(message = "Date is empty")
     @Past(message = "Date should be in the past")
     private LocalDate birthday;
 
+    @Column(name = "sex")
     @NotNull(message = "Sex is empty")
     @Enumerated(EnumType.STRING)
     private SexType sex;
