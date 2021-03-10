@@ -1,6 +1,7 @@
 package by.volkov.testtask.repository.jpa;
 
 import by.volkov.testtask.model.Author;
+import by.volkov.testtask.model.Book;
 import by.volkov.testtask.repository.AuthorRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +34,15 @@ public class JpaAuthorRepository implements AuthorRepository {
     @Override
     @Transactional
     public boolean delete(int id) {
-        return em.createNamedQuery(Author.DELETE)
+        Author author = em.find(Author.class, id);
+        for (Book book : author.getBooks()) {
+            if (book.getAuthors().size() == 1) {
+                em.remove(book);
+            } else {
+                book.getAuthors().remove(author);
+            }
+        }
+        return em.createNamedQuery(Author.DELETE, Author.class)
                 .setParameter("id", id)
                 .executeUpdate() != 0;
     }
