@@ -1,16 +1,11 @@
 DROP TABLE IF EXISTS author_book;
 DROP TABLE IF EXISTS book;
 DROP TABLE IF EXISTS author;
-DROP CAST IF EXISTS (VARCHAR AS sex_type);
-DROP TYPE IF EXISTS sex_type;
 DROP SEQUENCE IF EXISTS author_seq;
 DROP SEQUENCE IF EXISTS book_seq;
 
 CREATE SEQUENCE author_seq START WITH 100000;
 CREATE SEQUENCE book_seq START WITH 100000;
-
-CREATE TYPE sex_type AS ENUM ('MALE', 'FEMALE', 'UNDEFINED');
-CREATE CAST (VARCHAR AS sex_type) WITH INOUT AS IMPLICIT;
 
 CREATE TABLE author
 (
@@ -18,7 +13,7 @@ CREATE TABLE author
     name     VARCHAR                                 NOT NULL,
     surname  VARCHAR                                 NOT NULL,
     birthday DATE                                    NOT NULL,
-    sex      sex_type            DEFAULT 'UNDEFINED' NOT NULL
+    sex      VARCHAR             DEFAULT 'UNDEFINED' NOT NULL
 );
 
 CREATE TABLE book
@@ -32,7 +27,7 @@ CREATE TABLE book
 CREATE TABLE author_book
 (
     author_id INTEGER NOT NULL,
-    book_id INTEGER,
+    book_id   INTEGER,
     UNIQUE (author_id, book_id),
     FOREIGN KEY (author_id) REFERENCES author (id) ON DELETE CASCADE,
     FOREIGN KEY (book_id) REFERENCES book (id) ON DELETE CASCADE
