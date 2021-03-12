@@ -6,7 +6,6 @@ import by.volkov.testtask.model.SexType;
 import by.volkov.testtask.repository.BookRepository;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,14 +15,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
-@Transactional(readOnly = true)
 public class JpaBookRepository implements BookRepository {
 
     @PersistenceContext
     private EntityManager em;
 
     @Override
-    @Transactional
     public Book save(Book book, int... authorId) {
         book.setAuthors(Arrays.stream(authorId)
                 .mapToObj(id -> em.getReference(Author.class, id))
@@ -38,7 +35,6 @@ public class JpaBookRepository implements BookRepository {
     }
 
     @Override
-    @Transactional
     public boolean delete(int id) {
         return em.createNamedQuery(Book.DELETE)
                 .setParameter("id", id)
