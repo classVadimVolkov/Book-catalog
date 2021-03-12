@@ -27,6 +27,7 @@
         <!-- Hibernate -->
         <hibernate-validator.version>6.2.0.Final</hibernate-validator.version>
         <hibernate.version>5.4.28.Final</hibernate.version>
+        <javax-el.version>3.0.1-b12</javax-el.version>
 
     </properties>
 
@@ -96,6 +97,15 @@
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
+
+        <!--http://hibernate.org/validator/documentation/getting-started/#unified-expression-language-el-->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>${javax-el.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
 
     </dependencies>
 
