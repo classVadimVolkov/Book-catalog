@@ -3,14 +3,15 @@ package by.volkov.testtask.web;
 import by.volkov.testtask.model.Author;
 import by.volkov.testtask.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/authors")
 public class AuthorsController {
 
@@ -22,52 +23,36 @@ public class AuthorsController {
     }
 
     @GetMapping()
-    public String getAll(Model model) {
-        model.addAttribute("authors", service.getAll());
-        return "authors/authors";
+    public ResponseEntity<List<Author>> getAll() {
+        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public String get(@PathVariable("id") int id, Model model) {
-        model.addAttribute("author", service.get(id));
-        return "authors/get";
-    }
-
-    @GetMapping("/new")
-    public String newAuthor(Model model) {
-        model.addAttribute("author", new Author());
-        return "authors/new";
+    public ResponseEntity<Author> get(@PathVariable("id") int id) {
+        return new ResponseEntity<>(service.get(id), HttpStatus.OK);
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("author") @Valid Author author, BindingResult bindingResult) {
+    public ResponseEntity<?> create(@RequestBody @Valid Author author, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "authors/new";
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        service.create(author);
-        return "redirect:/authors";
+        return new ResponseEntity<>(service.create(author), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}/edit")
-    public String edit(@PathVariable("id") int id, Model model) {
-        model.addAttribute("author", service.get(id));
-        return "authors/edit";
-    }
-
-    @PatchMapping("/{id}")
-    public String update(@ModelAttribute("author") @Valid Author author, BindingResult bindingResult) {
+    @PutMapping("/id")
+    public ResponseEntity<?> update(@RequestBody @Valid Author author, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "authors/edit";
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
         service.update(author);
-        return "redirect:/authors";
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") int id) {
+    public ResponseEntity<?> delete(@PathVariable("id") int id) {
         service.delete(id);
-        return "redirect:/authors";
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
