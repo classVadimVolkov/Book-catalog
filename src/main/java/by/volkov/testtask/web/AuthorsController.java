@@ -4,6 +4,7 @@ import by.volkov.testtask.model.Author;
 import by.volkov.testtask.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class AuthorsController {
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Author> get(@PathVariable("id") int id) {
         return new ResponseEntity<>(service.get(id), HttpStatus.OK);
     }

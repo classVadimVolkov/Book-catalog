@@ -11,6 +11,4 @@
 
     <context:component-scan base-package="by.volkov.testtask.**.service"/>
 
-    <context:component-scan base-package="by.volkov.testtask.**.web"/>
-
 </beans>

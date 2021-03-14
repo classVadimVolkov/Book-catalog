@@ -4,7 +4,6 @@ import by.volkov.testtask.model.Book;
 import by.volkov.testtask.model.SexType;
 import by.volkov.testtask.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDate;
 
-@Controller
+@RestController()
 public class BooksController {
 
     private final BookService service;
@@ -22,7 +21,7 @@ public class BooksController {
         this.service = service;
     }
 
-    @GetMapping("/books")
+/*    @GetMapping("/books")
     public String getAll(Model model) {
         model.addAttribute("books", service.getAll());
         return "books/catalog";
@@ -130,5 +129,5 @@ public class BooksController {
         model.addAttribute("booksByFilters", service.getAllFiltered(title, publicationYear, publishingHouse,
                 authorName, authorSurname, authorSex, authorBirthday));
         return "books/catalog";
-    }
+    }*/
 }
