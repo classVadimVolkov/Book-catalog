@@ -4,14 +4,17 @@ import by.volkov.testtask.model.Book;
 import by.volkov.testtask.model.SexType;
 import by.volkov.testtask.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.List;
 
-@RestController()
+@RestController
+@RequestMapping
 public class BooksController {
 
     private final BookService service;
@@ -21,113 +24,91 @@ public class BooksController {
         this.service = service;
     }
 
-/*    @GetMapping("/books")
-    public String getAll(Model model) {
-        model.addAttribute("books", service.getAll());
-        return "books/catalog";
+    @GetMapping("/books")
+    public ResponseEntity<List<Book>> getAll() {
+        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/authors/author-id/books/{book-id}")
-    public String get(@PathVariable("book-id") int id, Model model) {
-        model.addAttribute("book", service.get(id));
-        return "books/get";
-    }
-
-    @GetMapping("/authors/author-id/books/new")
-    public String newBook(Model model) {
-        model.addAttribute("book", new Book());
-        return "books/new";
+    @GetMapping("/books/{id}")
+    public ResponseEntity<Book> get(@PathVariable("id") int id) {
+        return new ResponseEntity<>(service.get(id), HttpStatus.OK);
     }
 
     @PostMapping("/authors/{author-id}/books")
-    public String create(@PathVariable("author-id") int id,
-                         @ModelAttribute("book") @Valid Book book, BindingResult bindingResult) {
+    public ResponseEntity<?> create(@PathVariable("author-id") int authorId,
+                                    @RequestBody @Valid Book book, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "books/new";
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        service.create(book, id);
-        return "redirect:/books";
+        return new ResponseEntity<>(service.create(book, authorId), HttpStatus.CREATED);
     }
 
-    @GetMapping("/authors/author-id/books/{book-id}/edit")
-    public String edit(@PathVariable("book-id") int id, Model model) {
-        model.addAttribute("book", service.get(id));
-        return "books/edit";
-    }
-
-    @PatchMapping("/authors/{author-id}/books/book-id")
-    public String update(@ModelAttribute("author-id") int id, @Valid Book book, BindingResult bindingResult) {
+    @PutMapping("/authors/{author-id}/books/book-id")
+    public ResponseEntity<?> update(@PathVariable("author-id") int authorId,
+                                    @RequestBody @Valid Book book, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "books/edit";
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        service.update(book, id);
-        return "redirect:/books";
+        service.update(book, authorId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/authors/author-id/books/{book-id}")
-    public String delete(@PathVariable("book-id") int id) {
-        service.delete(id);
-        return "redirect:/books";
+    public ResponseEntity<?> delete(@PathVariable("book-id") int bookId) {
+        service.delete(bookId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/books")
-    public String getAllByTitle(@RequestParam(value = "title", required = false) String title, Model model) {
-        model.addAttribute("booksByTitle", service.getAllByTitle(title));
-        return "books/catalog";
+    @GetMapping("/books/getAllByTitle")
+    public ResponseEntity<List<Book>> getAllByTitle(@RequestParam(value = "title", required = false)
+                                                            String title) {
+        return new ResponseEntity<>(service.getAllByTitle(title), HttpStatus.OK);
     }
 
-    @GetMapping("/books")
-    public String getAllByPublicationYear(@RequestParam(value = "publicationYear", required = false)
-                                                  LocalDate publicationYear, Model model) {
-        model.addAttribute("booksByPublicationYear", service.getAllByPublicationYear(publicationYear));
-        return "books/catalog";
+    @GetMapping("/books/getAllByPublicationYear")
+    public ResponseEntity<List<Book>> getAllByPublicationYear(
+            @RequestParam(value = "publicationYear", required = false) LocalDate publicationYear) {
+        return new ResponseEntity<>(service.getAllByPublicationYear(publicationYear), HttpStatus.OK);
     }
 
-    @GetMapping("/books")
-    public String getAllByPublishingHouse(@RequestParam(value = "publishingHouse", required = false)
-                                                  String publishingHouse, Model model) {
-        model.addAttribute("booksByPublishingHouse", service.getAllByPublishingHouse(publishingHouse));
-        return "books/catalog";
+    @GetMapping("/books/getAllByPublishingHouse")
+    public ResponseEntity<List<Book>> getAllByPublishingHouse(
+            @RequestParam(value = "publishingHouse", required = false) String publishingHouse) {
+        return new ResponseEntity<>(service.getAllByPublishingHouse(publishingHouse), HttpStatus.OK);
     }
 
-    @GetMapping("/books")
-    public String getAllByAuthorFirstLettersNameOrSurname(@RequestParam(value = "authorName", required = false)
-                                                                  String name,
-                                                          @RequestParam(value = "authorSurname", required = false)
-                                                                  String surname, Model model) {
-
-        model.addAttribute("booksByAuthorFirstLettersNameOrSurname",
-                service.getAllByAuthorFirstLettersNameOrSurname(name, surname));
-        return "books/catalog";
+    @GetMapping("/books/getAllByAuthorFirstLettersNameOrSurname")
+    public ResponseEntity<List<Book>> getAllByAuthorFirstLettersNameOrSurname(
+            @RequestParam(value = "authorName", required = false) String name,
+            @RequestParam(value = "authorSurname", required = false) String surname) {
+        return new ResponseEntity<>(service.getAllByAuthorFirstLettersNameOrSurname(name, surname), HttpStatus.OK);
     }
 
-    @GetMapping("/books")
-    public String getAllByAuthorSex(@RequestParam(value = "authorSex", required = false) SexType sex, Model model) {
-        model.addAttribute("booksByAuthorSex", service.getAllByAuthorSex(sex));
-        return "books/catalog";
+    @GetMapping("/books/getAllByAuthorSex")
+    public ResponseEntity<List<Book>> getAllByAuthorSex(
+            @RequestParam(value = "authorSex", required = false) SexType sex) {
+        return new ResponseEntity<>(service.getAllByAuthorSex(sex), HttpStatus.OK);
     }
 
-    @GetMapping("/books")
-    public String getAllByAuthorBirthday(@RequestParam(value = "authorBirthday", required = false)
-                                                 LocalDate birthday, Model model) {
-        model.addAttribute("booksByAuthorBirthday", service.getAllByAuthorBirthday(birthday));
-        return "books/catalog";
+    @GetMapping("/books/getAllByAuthorBirthday")
+    public ResponseEntity<List<Book>> getAllByAuthorBirthday(
+            @RequestParam(value = "authorBirthday", required = false) LocalDate birthday) {
+        return new ResponseEntity<>(service.getAllByAuthorBirthday(birthday), HttpStatus.OK);
     }
 
-    @GetMapping("/books")
-    public String getAllFiltered(@RequestParam(value = "title", required = false) String title,
-                                 @RequestParam(value = "publicationYear", required = false) LocalDate publicationYear,
-                                 @RequestParam(value = "publishingHouse", required = false) String publishingHouse,
-                                 @RequestParam(value = "authorName", required = false) String authorName,
-                                 @RequestParam(value = "authorSurname", required = false) String authorSurname,
-                                 @RequestParam(value = "authorSex", required = false) SexType authorSex,
-                                 @RequestParam(value = "authorBirthday", required = false) LocalDate authorBirthday,
-                                 Model model) {
+    @GetMapping("/books/getAllFiltered")
+    public ResponseEntity<List<Book>> getAllFiltered(
+            @RequestParam(value = "title", required = false) String title,
+            @RequestParam(value = "publicationYear", required = false) LocalDate publicationYear,
+            @RequestParam(value = "publishingHouse", required = false) String publishingHouse,
+            @RequestParam(value = "authorName", required = false) String authorName,
+            @RequestParam(value = "authorSurname", required = false) String authorSurname,
+            @RequestParam(value = "authorSex", required = false) SexType authorSex,
+            @RequestParam(value = "authorBirthday", required = false) LocalDate authorBirthday) {
 
-        model.addAttribute("booksByFilters", service.getAllFiltered(title, publicationYear, publishingHouse,
-                authorName, authorSurname, authorSex, authorBirthday));
-        return "books/catalog";
-    }*/
+        return new ResponseEntity<>(service.getAllFiltered(title, publicationYear, publishingHouse,
+                authorName, authorSurname, authorSex, authorBirthday), HttpStatus.OK);
+    }
 }

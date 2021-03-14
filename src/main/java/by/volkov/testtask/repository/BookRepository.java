@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface BookRepository {
-    Book save(Book book, int... authorId);
+    Book save(Book book, int authorId);
 
     boolean delete(int id);
 

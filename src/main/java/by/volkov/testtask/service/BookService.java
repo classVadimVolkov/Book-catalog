@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -24,10 +22,8 @@ public class BookService {
         this.repository = repository;
     }
 
-    public Book create(Book book, int... authorId) {
+    public Book create(Book book, int authorId) {
         Assert.notNull(book, "book must not be null");
-        Assert.notEmpty(Arrays.stream(authorId).boxed().collect(Collectors.toList()),
-                "author id must not be empty");
         return repository.save(book, authorId);
     }
 
@@ -42,10 +38,8 @@ public class BookService {
         return repository.get(id);
     }
 
-    public void update(Book book, int... authorId) {
+    public void update(Book book, int authorId) {
         Assert.notNull(book, "author must not be null");
-        Assert.notEmpty(Arrays.stream(authorId).boxed().collect(Collectors.toList()),
-                "author id must not be empty");
         if (repository.save(book, authorId) == null) {
             throw new NotFoundException("Not found entity");
         }

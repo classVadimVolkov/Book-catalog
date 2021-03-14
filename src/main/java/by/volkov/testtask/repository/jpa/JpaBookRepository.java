@@ -6,12 +6,14 @@ import by.volkov.testtask.model.SexType;
 import by.volkov.testtask.repository.BookRepository;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Repository
@@ -20,11 +22,12 @@ public class JpaBookRepository implements BookRepository {
     @PersistenceContext
     private EntityManager em;
 
+    @Transactional
     @Override
-    public Book save(Book book, int... authorId) {
-        book.setAuthors(Arrays.stream(authorId)
-                .mapToObj(id -> em.getReference(Author.class, id))
-                .collect(Collectors.toSet()));
+    public Book save(Book book, int authorId) {
+        Set<Author> authors = new HashSet<>();
+        authors.add(em.getReference(Author.class, authorId));
+        book.setAuthors(authors);
 
         if (book.isNew()) {
             em.persist(book);
@@ -34,6 +37,7 @@ public class JpaBookRepository implements BookRepository {
         }
     }
 
+    @Transactional
     @Override
     public boolean delete(int id) {
         return em.createNamedQuery(Book.DELETE)
