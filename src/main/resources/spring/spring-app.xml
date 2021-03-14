@@ -7,7 +7,7 @@
        http://www.springframework.org/schema/context
        https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="by.volkov.testtask.**.repository.jpa"/>
+    <context:component-scan base-package="by.volkov.testtask.**.repository"/>
 
     <context:component-scan base-package="by.volkov.testtask.**.service"/>
 
