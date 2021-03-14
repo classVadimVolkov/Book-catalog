@@ -1,5 +1,12 @@
 package by.volkov.testtask.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -29,6 +36,9 @@ public class Author extends AbstractBaseEntity {
     private String surname;
 
     @Column(name = "birthday")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     @NotNull(message = "Date is empty")
     @Past(message = "Date should be in the past")
     private LocalDate birthday;
@@ -39,6 +49,7 @@ public class Author extends AbstractBaseEntity {
     private SexType sex;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "author_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id"))
     private Set<Book> books;

@@ -1,5 +1,14 @@
 package by.volkov.testtask.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -38,6 +47,9 @@ public class Book extends AbstractBaseEntity {
     private String title;
 
     @Column(name = "publication_year")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     @NotNull(message = "Date is empty")
     @Past(message = "Date should be in the past")
     private LocalDate publicationYear;
@@ -48,6 +60,7 @@ public class Book extends AbstractBaseEntity {
     private String publishingHouse;
 
     @ManyToMany(mappedBy = "books")
+    @JsonIgnore
     private Set<Author> authors;
 
     public Book() {

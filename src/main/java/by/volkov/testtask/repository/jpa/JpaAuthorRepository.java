@@ -4,6 +4,7 @@ import by.volkov.testtask.model.Author;
 import by.volkov.testtask.model.Book;
 import by.volkov.testtask.repository.AuthorRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,6 +16,7 @@ public class JpaAuthorRepository implements AuthorRepository {
     @PersistenceContext
     private EntityManager em;
 
+    @Transactional
     @Override
     public Author save(Author author) {
         if (author.isNew()) {
@@ -25,6 +27,7 @@ public class JpaAuthorRepository implements AuthorRepository {
         }
     }
 
+    @Transactional
     @Override
     public boolean delete(int id) {
         Author author = em.find(Author.class, id);
