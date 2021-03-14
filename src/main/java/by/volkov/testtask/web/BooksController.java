@@ -4,6 +4,7 @@ import by.volkov.testtask.model.Book;
 import by.volkov.testtask.model.SexType;
 import by.volkov.testtask.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -69,7 +70,8 @@ public class BooksController {
 
     @GetMapping("/books/getAllByPublicationYear")
     public ResponseEntity<List<Book>> getAllByPublicationYear(
-            @RequestParam(value = "publicationYear", required = false) LocalDate publicationYear) {
+            @DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam(value = "publicationYear", required = false)
+                    LocalDate publicationYear) {
         return new ResponseEntity<>(service.getAllByPublicationYear(publicationYear), HttpStatus.OK);
     }
 
@@ -83,7 +85,8 @@ public class BooksController {
     public ResponseEntity<List<Book>> getAllByAuthorFirstLettersNameOrSurname(
             @RequestParam(value = "authorName", required = false) String name,
             @RequestParam(value = "authorSurname", required = false) String surname) {
-        return new ResponseEntity<>(service.getAllByAuthorFirstLettersNameOrSurname(name, surname), HttpStatus.OK);
+        return new ResponseEntity<>(service.getAllByAuthorFirstLettersNameOrSurname(name, surname),
+                HttpStatus.OK);
     }
 
     @GetMapping("/books/getAllByAuthorSex")
@@ -94,7 +97,8 @@ public class BooksController {
 
     @GetMapping("/books/getAllByAuthorBirthday")
     public ResponseEntity<List<Book>> getAllByAuthorBirthday(
-            @RequestParam(value = "authorBirthday", required = false) LocalDate birthday) {
+            @DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam(value = "authorBirthday", required = false)
+                    LocalDate birthday) {
         return new ResponseEntity<>(service.getAllByAuthorBirthday(birthday), HttpStatus.OK);
     }
 
