@@ -105,12 +105,14 @@ public class BooksController {
     @GetMapping("/books/getAllFiltered")
     public ResponseEntity<List<Book>> getAllFiltered(
             @RequestParam(value = "title", required = false) String title,
-            @RequestParam(value = "publicationYear", required = false) LocalDate publicationYear,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam(value = "publicationYear", required = false)
+                    LocalDate publicationYear,
             @RequestParam(value = "publishingHouse", required = false) String publishingHouse,
             @RequestParam(value = "authorName", required = false) String authorName,
             @RequestParam(value = "authorSurname", required = false) String authorSurname,
             @RequestParam(value = "authorSex", required = false) SexType authorSex,
-            @RequestParam(value = "authorBirthday", required = false) LocalDate authorBirthday) {
+            @DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam(value = "authorBirthday", required = false)
+                    LocalDate authorBirthday) {
 
         return new ResponseEntity<>(service.getAllFiltered(title, publicationYear, publishingHouse,
                 authorName, authorSurname, authorSex, authorBirthday), HttpStatus.OK);
