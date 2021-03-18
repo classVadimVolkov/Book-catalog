@@ -8,7 +8,7 @@ Book catalog app
 git clone https://github.com/classVadimVolkov/Book-catalog.git
 
 ------------------------
-2. Run Tomcat on local server
+2. Run Tomcat as a local server
 
 ------------------------
 3. Open Postman for test
