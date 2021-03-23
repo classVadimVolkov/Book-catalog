@@ -23,7 +23,7 @@ public class BookService {
     }
 
     public Book create(Book book, int authorId) {
-        Assert.notNull(book, "book must not be null");
+        Assert.notNull(book, "Book must not be null");
         return repository.save(book, authorId);
     }
 
@@ -39,7 +39,7 @@ public class BookService {
     }
 
     public void update(Book book, int authorId) {
-        Assert.notNull(book, "author must not be null");
+        Assert.notNull(book, "Author must not be null");
         if (repository.save(book, authorId) == null) {
             throw new NotFoundException("Not found entity");
         }
