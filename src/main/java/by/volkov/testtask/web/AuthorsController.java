@@ -4,6 +4,7 @@ import by.volkov.testtask.model.Author;
 import by.volkov.testtask.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/authors")
+@RequestMapping(value = "/authors", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthorsController {
 
     private final AuthorService service;
@@ -32,7 +33,7 @@ public class AuthorsController {
         return new ResponseEntity<>(service.get(id), HttpStatus.OK);
     }
 
-    @PostMapping()
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> create(@RequestBody @Valid Author author, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -41,7 +42,7 @@ public class AuthorsController {
         return new ResponseEntity<>(service.create(author), HttpStatus.CREATED);
     }
 
-    @PutMapping("/id")
+    @PutMapping(value = "/id", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> update(@RequestBody @Valid Author author, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
