@@ -41,7 +41,7 @@ GET http://localhost:8080/books/getAllByTitle?title=Дети_мои
 
 GET http://localhost:8080/books/getAllByPublicationYear?publicationYear=1931-01-01
 
-GET http://localhost:8080/books/getAllByPublishingHouse?publishingHouse=ACT
+GET http://localhost:8080/books/getAllByPublishingHouse?publishingHouse=АСТ
 
 GET http://localhost:8080/books/getAllByAuthorFirstLettersNameOrSurname?authorName=Илья&authorSurname=Ильф
 
